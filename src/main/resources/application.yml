@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    include:
+      - single
+  #     session 配置，默认存放session在cookie， 如果想自定义可以使用@EnableRedisHttpSession注解实现配置类，选择session策略,可以存放在头部，或者cookie
+  session:
+    store-type: redis
+    #    过期时间，默认s， 也可以指定单位，这里设置10分钟
+    timeout: 10m
+    redis:
+      #    session的刷新模式，有两种： on_save: 保存时刷新（默认）， immediate: 实时刷新
+      flush-mode: on_save
+      #    redis存储session的命名空间，默认是：Spring:session；命名空间主要是用于多个服务之间进行区分 。
+      namespace: redis-session
+server:
+  servlet:
+    context-path: /spring-session
